@@ -1,7 +1,8 @@
 class UsersController < ApplicationController 
   
   get "/users/:id" do
-    if logged_in?
+    user = User.find_by(id: params[:id])
+    if logged_in? && user_permision?(user)
       @user = current_user
       erb :"/users/show"
     else 

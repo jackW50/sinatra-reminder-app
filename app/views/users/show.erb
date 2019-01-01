@@ -21,3 +21,18 @@
 
 <h3>See your monthly reminders <a href="/reminders/show/<%=@user.reminders.where(frequency: "monthly")%>">HERE</a></h3>
 
+<footer>
+  <ul>
+    <li>
+      <a href="/users/<%=@user.id%>/edit">Edit Profile</a>
+    </li>
+    <li>
+      <form action="/users/<%=@user.id%>/delete" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete Profile">
+      </form>
+    </li>
+  </ul>
+</footer>
+
+
