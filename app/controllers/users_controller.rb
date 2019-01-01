@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   
   patch "/users/:id" do 
     user = User.find_by(id: params[:id])
-    if logged_in? && user_permission(user)
+    if logged_in? && user_permission?(user)
       user.update(username: params[:username], email: params[:email], password: params[:password])
       redirect "/users/#{user.id}"
     else 
@@ -30,9 +30,15 @@ class UsersController < ApplicationController
     end 
   end 
   
-  delete "/users/:id/delete" do 
-    session.clear 
-    redirect "/"
+  delete "/users/:id/delete" do
+    user = User.find_by(id: params[:id])
+    if logged_in? && user_permission?(user)
+      user.destroy
+      session.clear 
+      redirect "/"
+    else 
+      redirect "/login"
+    end 
   end 
   
 end 
