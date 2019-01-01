@@ -1,1 +1,18 @@
 <h1>User Show Page(profile)</h1>
+
+<h3>Hello, <%=@user.username%></h3>
+<h4><%=Date.today.strftime('%a, %e %b %Y')%></h4>
+  
+  <%if !@user.reminders.empty?%>
+    <%@user.reminders.where(frequency: "daily").each.with_index(1) do |reminder, i| %>
+      <div>
+        <h4>Daily Reminders:</h4>
+        <ul>
+          <li>
+            <p><a href="/reminders/<%=reminder.id%>"><%=i%></a>: <%=reminder.note%></p>
+          </li>
+        </ul>
+      
+      </div>
+    <%end%>
+  <%end%>

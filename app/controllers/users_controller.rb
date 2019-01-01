@@ -1,7 +1,12 @@
 class UsersController < ApplicationController 
   
-  get "/users/:id" do 
-    erb :"/users/show"
+  get "/users/:id" do
+    if logged_in?
+      @user = current_user
+      erb :"/users/show"
+    else 
+      "/login"
+    end 
   end 
   
   get "/users/:id/edit" do 
