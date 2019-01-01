@@ -1,18 +1,23 @@
 <h1>User Show Page(profile)</h1>
 
 <h3>Hello, <%=@user.username%></h3>
-<h4><%=Date.today.strftime('%a, %e %b %Y')%></h4>
-  
-  <%if !@user.reminders.empty?%>
-    <%@user.reminders.where(frequency: "daily").each.with_index(1) do |reminder, i| %>
-      <div>
-        <h4>Daily Reminders:</h4>
-        <ul>
-          <li>
-            <p><a href="/reminders/<%=reminder.id%>"><%=i%></a>: <%=reminder.note%></p>
-          </li>
-        </ul>
-      
-      </div>
+<h3><%=Date.today.strftime('%a, %e %b %Y')%></h4>
+   
+    <%if !@user.reminders.empty?%>
+      <h4>Daily Reminders:</h4>
+      <%@user.reminders.where(frequency: "daily").each.with_index(1) do |reminder, i| %>
+        <div>
+          <ul>
+            <li>
+              <p><a href="/reminders/<%=reminder.id%>"><%=i%></a>: <%=reminder.note%></p>
+            </li>
+          </ul>
+        
+        </div>
+      <%end%>
     <%end%>
-  <%end%>
+    
+<h3>See your weekly reminders <a href="/reminders/show/<%=@user.reminders.where(frequency: "weekly")%>">HERE</a></h3>
+
+<h3>See your monthly reminders <a href="/reminders/show/<%=@user.reminders.where(frequency: "monthly")%>">HERE</a></h3>
+
