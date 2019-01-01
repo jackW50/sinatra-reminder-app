@@ -20,6 +20,7 @@
         
         <%if logged_in?%>
           <a href="/logout">Logout</a>
+          <a href="/users/<%=current_user.id%>">Profile</a>
         <%end%>
 
       <footer class="branding">

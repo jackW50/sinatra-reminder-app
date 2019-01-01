@@ -18,9 +18,9 @@
       <%end%>
     <%end%>
     
-<h3>See your weekly reminders <a href="/reminders/show/<%=@user.reminders.where(frequency: "weekly")%>">HERE</a></h3>
+<h3>See your weekly reminders <a href="/reminders/<%=@user.id%>/weekly">HERE</a></h3>
 
-<h3>See your monthly reminders <a href="/reminders/show/<%=@user.reminders.where(frequency: "monthly")%>">HERE</a></h3>
+<h3>See your monthly reminders <a href="/reminders/<%=@user.id%>/monthly">HERE</a></h3>
 
 <footer>
   <ul>

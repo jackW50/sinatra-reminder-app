@@ -2,11 +2,11 @@ class UsersController < ApplicationController
   
   get "/users/:id" do
     user = User.find_by(id: params[:id])
-    if logged_in? && user_permision?(user)
+    if logged_in? && user_permission?(user)
       @user = current_user
       erb :"/users/show"
     else 
-      "/login"
+      redirect "/login"
     end 
   end 
   
