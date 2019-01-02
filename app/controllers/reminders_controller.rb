@@ -1,4 +1,5 @@
 class RemindersController < ApplicationController
+  use Rack::Flash
   
   get "/reminders" do
     if logged_in?
@@ -6,6 +7,7 @@ class RemindersController < ApplicationController
       @reminders = @user.reminders 
       erb :"/reminders/reminders"
     else 
+      flash[:message] = "You are not logged in."
       redirect "/login"
     end 
   end 
@@ -13,7 +15,8 @@ class RemindersController < ApplicationController
   get "/reminders/new" do
     if logged_in?
       erb :"reminders/new"
-    else 
+    else
+      flash[:message] = "You are not logged in."
       redirect "/login"
     end 
   end 
@@ -25,48 +28,74 @@ class RemindersController < ApplicationController
       if reminder.save
         redirect "/reminders/#{reminder.id}"
       else 
+        flash[:message] = "In order to create a reminder you must have text and the frequency of the reminder needs to be checked."
         redirect "/reminders/new"
       end 
-    else 
+    else
+      flash[:message] = "You are not logged in."
       redirect "/login"
     end 
   end 
   
   get "/reminders/:id" do
     @reminder = Reminder.find_by(id: params[:id])
-    if logged_in? && !!@reminder && reminder_permission?(@reminder)
-      erb :"/reminders/show"
+    if logged_in? && !!@reminder
+      if reminder_permission?(@reminder)
+        erb :"/reminders/show"
+      else 
+        flash[:message] = "You don't have permission to do that."
+        redirect "/users/#{current_user.id}"
+      end 
     else 
+      flash[:message] = "You are not logged in."
       redirect "/login"
     end 
   end 
   
   get "/reminders/:id/edit" do
     @reminder = Reminder.find_by(id: params[:id])
-    if logged_in? && !!@reminder && reminder_permission?(@reminder)
-      @frequencies = ["daily", "weekly", "monthly"]
-      erb :"/reminders/edit"
+    if logged_in? && !!@reminder 
+      if reminder_permission?(@reminder)
+        @frequencies = ["daily", "weekly", "monthly"]
+        erb :"/reminders/edit"
+      else 
+        flash[:message] = "You don't have permission to do that."
+        redirect "/users/#{current_user.id}"
+      end 
     else 
+      flash[:message] = "You are not logged in."
       redirect "/login"
     end 
   end 
   
   patch "/reminders/:id" do
     reminder = Reminder.find_by(id: params[:id])
-    if logged_in? && !!reminder && reminder_permission?(reminder)
-      reminder.update(note: params[:note], frequency: params[:frequency])
-      redirect "/reminders/#{reminder.id}"
-    else 
+    if logged_in? && !!reminder 
+      if reminder_permission?(reminder)
+        reminder.update(note: params[:note], frequency: params[:frequency])
+        redirect "/reminders/#{reminder.id}"
+      else 
+        flash[:message] = "You don't have permission to do that."
+        redirect "/users/#{current_user.id}"
+      end 
+    else
+      flash[:message] = "You are not logged in."
       redirect "/login"
     end 
   end 
   
   delete "/reminders/:id/delete" do
     reminder = Reminder.find_by(id: params[:id])
-    if logged_in? && !!reminder && reminder_permission?(reminder)
-      reminder.destroy
-      redirect "/users/#{user.id}"
+    if logged_in? && !!reminder 
+      if reminder_permission?(reminder)
+        reminder.destroy
+        redirect "/users/#{user.id}"
+      else 
+        flash[:message] = "You don't have permission to do that."
+        redirect "/users/#{current_user.id}"
+      end 
     else 
+      flash[:message] = "You are not logged in."
       redirect "/login"
     end 
   end 
@@ -74,10 +103,16 @@ class RemindersController < ApplicationController
   get "/reminders/:id/:frequency" do
     @user = User.find_by(id: params[:id]) 
     @frequency = params[:frequency]
-    if logged_in? && user_permission?(@user)
-      @reminders = @user.reminders.where(frequency: @frequency)
-      erb :"/reminders/show_frequency"
+    if logged_in?
+      if user_permission?(@user)
+        @reminders = @user.reminders.where(frequency: @frequency)
+        erb :"/reminders/show_frequency"
+      else 
+        flash[:message] = "You don't have permission to do that."
+        redirect "/users/#{current_user.id}"
+      end 
     else 
+      flash[:message] = "You are not logged in."
       redirect "/login"
     end 
   end 

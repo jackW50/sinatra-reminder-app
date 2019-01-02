@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  use Rack::Flash
   
   get "/login" do 
     if logged_in?
@@ -11,7 +12,7 @@ class SessionsController < ApplicationController
   get "/signup" do
     if logged_in?
       redirect "/users/#{current_user.id}"
-    else 
+    else
       erb:"/sessions/signup"
     end 
   end 
@@ -22,6 +23,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id 
       redirect "/users/#{user.id}"
     else
+      flash[:message] = "The username, email, and/or password is/are not valid"
       redirect "/login"
     end 
   end 
@@ -32,6 +34,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id 
       redirect "/users/#{user.id}"
     else 
+      flash[:message] = "You need a valid username, email, and password. Try again."
       redirect "/signup"
     end 
   end 

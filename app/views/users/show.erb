@@ -1,4 +1,7 @@
 <h1>Profile</h1>
+<%if flash.has?(:message)%>
+  <%= flash[:message]%>
+<%end%>
 
 <h3>Hello, <%=@user.username%></h3>
 <h3><%=Date.today.strftime('%a, %b %e %Y')%></h4>
