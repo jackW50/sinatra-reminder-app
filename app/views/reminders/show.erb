@@ -1,1 +1,11 @@
-<h1>I'm in reminders show page</h1>
+<h1>This is a <%=@reminder.frequency%> reminder</h1>
+
+<div>
+  <p><%=@reminder.note%></p>
+</div>
+
+<a href="/reminders/<%=@reminder.id%>/edit">Edit</a>
+<form action="/reminders/<%=@reminder.id%>/delete" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" name="Delete Reminder">
+</form>
