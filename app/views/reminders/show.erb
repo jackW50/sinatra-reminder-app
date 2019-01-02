@@ -1,4 +1,10 @@
-<h1>This is a <%=@reminder.frequency%> reminder</h1>
+<%if @reminder.frequency == "monthly"%>
+  <h1>This is a reminder for the month of <%=Date.today.strftime('%B')%> </h1>
+<%elsif @reminder.frequency == "weekly"%>
+  <h1>This is a reminder for week <%=Date.today.strftime('%v')%> of <%=Date.today.strftime('%Y')%></h1>
+<%else%>
+  <h1>This is a <%=@reminder.frequency%> reminder for <%=Date.today.strftime('%m/%d/%y')%></h1>
+<%end%>
 
 <div>
   <p><%=@reminder.note%></p>
