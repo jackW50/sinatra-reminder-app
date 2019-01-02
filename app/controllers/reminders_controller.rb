@@ -51,8 +51,13 @@ class RemindersController < ApplicationController
     end 
   end 
   
-  patch "/reminders/:id" do 
-    redirect "/reminders/#{reminder.id}"
+  patch "/reminders/:id" do
+    reminder = Reminder.find_by(id: params[:id])
+    if logged_in? && !!reminder && reminder_permission?(reminder)
+      redirect "/reminders/#{reminder.id}"
+    else 
+      redirect "/login"
+    end 
   end 
   
   delete "/reminders/:id/delete" do 
