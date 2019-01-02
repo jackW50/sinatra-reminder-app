@@ -60,8 +60,14 @@ class RemindersController < ApplicationController
     end 
   end 
   
-  delete "/reminders/:id/delete" do 
-    redirect "/users/#{user.id}"
+  delete "/reminders/:id/delete" do
+    reminder = Reminder.find_by(id: params[:id])
+    if logged_in? && !!reminder && reminder_permission?(reminder)
+      reminder.destroy
+      redirect "/users/#{user.id}"
+    else 
+      redirect "/login"
+    end 
   end 
   
   get "/reminders/:id/:frequency" do
