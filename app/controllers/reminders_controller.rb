@@ -1,5 +1,4 @@
 class RemindersController < ApplicationController
-  #use Rack::Flash
   
   get "/reminders" do
     if logged_in?
@@ -28,7 +27,7 @@ class RemindersController < ApplicationController
       if reminder.save
         redirect "/reminders/#{reminder.id}"
       else 
-        flash[:message] = "In order to create a reminder you must have text and the frequency of the reminder needs to be checked."
+        flash[:message] = "In order to create a reminder you must have text and a reminder frequency needs to be checked."
         redirect "/reminders/new"
       end 
     else

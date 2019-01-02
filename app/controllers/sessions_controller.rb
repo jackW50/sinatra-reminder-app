@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
- # use Rack::Flash
   
   get "/login" do 
     if logged_in?
@@ -23,7 +22,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id 
       redirect "/users/#{user.id}"
     else
-      flash[:message] = "The username, email, and/or password is/are not valid"
+      flash[:message] = "Make sure all fields are filled in and valid."
       redirect "/login"
     end 
   end 
@@ -34,7 +33,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id 
       redirect "/users/#{user.id}"
     else 
-      flash[:message] = "You need a valid username, email, and password. Try again."
+      flash[:message] = "All fields must be filled in with valid information."
       redirect "/signup"
     end 
   end 

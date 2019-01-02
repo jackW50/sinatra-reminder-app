@@ -1,7 +1,5 @@
 class UsersController < ApplicationController 
   
-  #use Rack::Flash
-  
   get "/users/:id" do
     user = User.find_by(id: params[:id])
     if logged_in?
