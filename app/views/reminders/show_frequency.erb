@@ -1,1 +1,16 @@
-<h1>This is the show frequency show page</h1>
+<h1>These are your <%=@frequency%> reminders</h1>
+ @reminders = user.reminders.where(frequency: params[:frequency])
+ <%if !@reminders.empty?%>
+  <%@reminders.each.with_index(1) do |reminder, i|%>
+    <ul>
+      <li>
+        <p><a href="/reminders/<%=reminder.id%>"><%=i%>:</a> <%=reminder.note%></p>
+      </li>
+    </ul>
+  <%end%>
+  
+<%else%>
+  <p>At this moment in time, you do not have any <%=@frequency%> reminders. If you would like to create some, please <a href="/reminders/new">CLick Here.</a></p>
+<%end%> 
+ 
+ 

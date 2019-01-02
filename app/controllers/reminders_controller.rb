@@ -71,12 +71,13 @@ class RemindersController < ApplicationController
   end 
   
   get "/reminders/:id/:frequency" do
-    user = User.find_by(id: params[:id])
-    if logged_in? && user_permission?(user)
-      @reminders = user.reminders.where(frequency: params[:frequency])
+    @user = User.find_by(id: params[:id]) 
+    @frequency = params[:frequency]
+    if logged_in? && user_permission?(@user)
+      @reminders = user.reminders.where(frequency: @frequency)
       erb :"/reminders/show_frequency"
     else 
-      redirect "/users/#{current_user.id}"
+      redirect "/login"
     end 
   end 
   
