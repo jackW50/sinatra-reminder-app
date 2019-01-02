@@ -19,7 +19,8 @@ Specs:
 - #A user's id is checked to match the foreign key of the reminder. If they do not match, then the user has no access.
 - [x] Include user input validations
 - #Users are validated with a username, email, and password. If any of these attributes are left blank, then the user is not validated.
-- [ ] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
+- [x] BONUS - not required - Display validation failures to user with error message (example form URL e.g. /posts/new)
+- #I used sinatra-flash gem to display validation failures.
 - [ ] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 
 Confirm
