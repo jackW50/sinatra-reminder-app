@@ -44,6 +44,7 @@ class RemindersController < ApplicationController
   get "/reminders/:id/edit" do
     @reminder = Reminder.find_by(id: params[:id])
     if logged_in? && !!@reminder && reminder_permission?(@reminder)
+      @frequencies = ["daily", "weekly", "monthly"]
       erb :"/reminders/edit"
     else 
       redirect "/login"
