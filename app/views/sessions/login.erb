@@ -1,6 +1,7 @@
 <h1>Login</h1>
 <% if !!flash[:message]%>
   <%= flash[:message] %>
+  <p>If you don't have a profile, create one <a href="/signup">HERE</a></p>
 <%end%>
 
 <form action="/login" method="POST">
