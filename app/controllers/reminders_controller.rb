@@ -10,8 +10,12 @@ class RemindersController < ApplicationController
     end 
   end 
   
-  get "/reminders/new" do 
-    erb :"reminders/new"
+  get "/reminders/new" do
+    if logged_in?
+      erb :"reminders/new"
+    else 
+      redirect "/login"
+    end 
   end 
   
   post "/reminders" do 
