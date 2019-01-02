@@ -19,7 +19,17 @@ class RemindersController < ApplicationController
   end 
   
   post "/reminders" do 
-    redirect "/reminders/#{reminder.id}"
+    if logged_in?
+      reminder = Reminder.new(params)
+      if reminder.save
+        reminder.user = current_user
+        redirect "/reminders/#{reminder.id}"
+      else 
+        redirect "/reminders/new"
+      end 
+    else 
+      redirect "/login"
+    end 
   end 
   
   get "/reminders/:id" do 
