@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
       user.id == current_user.id 
     end 
     
-    def reminder_permission(reminder)
+    def reminder_permission?(reminder)
       reminder.user_id == current_user.id
     end 
   end 

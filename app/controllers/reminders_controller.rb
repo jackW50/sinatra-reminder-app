@@ -32,8 +32,13 @@ class RemindersController < ApplicationController
     end 
   end 
   
-  get "/reminders/:id" do 
-    erb :"/reminders/show"
+  get "/reminders/:id" do
+    @reminder = Reminder.find_by(id: params[:id])
+    if logged_in? && !!@reminder && reminder_permission?(@reminder)
+      erb :"/reminders/show"
+    else 
+      redirect "/login"
+    end 
   end 
   
   get "/reminders/:id/edit" do 
