@@ -1,7 +1,13 @@
 class RemindersController < ApplicationController
   
   get "/reminders" do
-    erb :"/reminders/reminders"
+    if logged_in?
+      @user = current_user
+      @reminders = @user.reminders 
+      erb :"/reminders/reminders"
+    else 
+      redirect "/login"
+    end 
   end 
   
   get "/reminders/new" do 

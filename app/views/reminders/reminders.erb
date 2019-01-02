@@ -1,1 +1,14 @@
-<h1>I'm in reminders index</h1>
+<h1><%=@user.username%>'s Reminders</h1>
+
+  <%if !@reminders.empty?%>
+    <%@reminders.each.with_index(1) do |reminder, i| %>
+      <ul>
+        <li>
+          <p><a href="/reminders/<%=reminder.id%>"><%=i%>:</a> <%=reminder.note%></p>
+        </li>
+      </ul>
+    <%end%>
+  <%else%>
+    <p>You currently have no reminders at this point in time. If you would like to create some <a href="/reminders/new">Click This Link.</a></p>
+  <%end%>
+
