@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     end 
   end 
   
-  get "/users/:id/edit" do 
+  get "/users/:id/edit" do
     user = User.find_by(id: params[:id])
     if logged_in? && user_permission?(user)
       @user = current_user
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
         user.reminders.each do |reminder|
           reminder.destroy
         end 
+      end 
       user.destroy
       session.clear 
       redirect "/"

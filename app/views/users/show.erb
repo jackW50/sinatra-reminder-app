@@ -1,7 +1,7 @@
-<h1>User Show Page(profile)</h1>
+<h1>Profile</h1>
 
 <h3>Hello, <%=@user.username%></h3>
-<h3><%=Date.today.strftime('%a, %e %b %Y')%></h4>
+<h3><%=Date.today.strftime('%a, %b %e %Y')%></h4>
 <a href="/reminders/new">Create a Reminder</a>
    
     <%if !@user.reminders.empty?%>
@@ -25,14 +25,15 @@
 <footer>
   <ul>
     <li>
-      <a href="/users/<%=@user.id%>/edit">Edit Profile</a>
-    </li>
-    <li>
       <form action="/users/<%=@user.id%>/delete" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <input type="submit" value="Delete Profile">
       </form>
     </li>
+    <li>
+      <a href="/users/<%=@user.id%>/edit">Edit Profile</a>
+    </li>
+    <li>
   </ul>
 </footer>
 
