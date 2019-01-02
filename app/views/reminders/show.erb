@@ -7,5 +7,7 @@
 <a href="/reminders/<%=@reminder.id%>/edit">Edit</a>
 <form action="/reminders/<%=@reminder.id%>/delete" method="POST">
   <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" name="Delete Reminder">
+  <input type="submit" value="Delete Reminder">
 </form>
+<a href="/reminders/<%=@reminder.user_id%>/weekly">Weekly Reminders</a>
+<a href="/reminders/<%=@reminder.user_id%>/monthly">Monthly Reminders</a>
