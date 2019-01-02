@@ -1,6 +1,6 @@
 <h1>These are your <%=@frequency%> reminders</h1>
 <h2><%=Date.today.strftime('%B') if @frequency == "monthly"%></h2>
-<h2><%="Week: #{Date.today.strftime('%v')}" if @frequency == "weekly"%></h2>
+<h2><%="Week: #{Date.today.strftime('%V')} of #{Date.today.strftime('%Y')}" if @frequency == "weekly"%></h2>
 
  <%if !@reminders.empty?%>
   <%@reminders.each.with_index(1) do |reminder, i|%>
