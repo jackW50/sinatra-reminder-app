@@ -1,5 +1,5 @@
 class RemindersController < ApplicationController
-  use Rack::Flash
+  #use Rack::Flash
   
   get "/reminders" do
     if logged_in?

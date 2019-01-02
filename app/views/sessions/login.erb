@@ -1,5 +1,5 @@
 <h1>Login</h1>
-<% if flash.has?(:message)%>
+<% if !!flash[:message]%>
   <%= flash[:message] %>
 <%end%>
 
