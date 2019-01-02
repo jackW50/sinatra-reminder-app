@@ -33,6 +33,10 @@ class UsersController < ApplicationController
   delete "/users/:id/delete" do
     user = User.find_by(id: params[:id])
     if logged_in? && user_permission?(user)
+      if !user.reminders.empty? 
+        user.reminders.each do |reminder|
+          reminder.destroy
+        end 
       user.destroy
       session.clear 
       redirect "/"

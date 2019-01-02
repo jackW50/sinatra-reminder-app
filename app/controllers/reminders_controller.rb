@@ -18,11 +18,11 @@ class RemindersController < ApplicationController
     end 
   end 
   
-  post "/reminders" do 
+  post "/reminders" do
     if logged_in?
       reminder = Reminder.new(params)
+      reminder.user = current_user 
       if reminder.save
-        reminder.user = current_user
         redirect "/reminders/#{reminder.id}"
       else 
         redirect "/reminders/new"
@@ -54,6 +54,7 @@ class RemindersController < ApplicationController
   patch "/reminders/:id" do
     reminder = Reminder.find_by(id: params[:id])
     if logged_in? && !!reminder && reminder_permission?(reminder)
+      reminder.update(note: params[:note], frequency: params[:frequency])
       redirect "/reminders/#{reminder.id}"
     else 
       redirect "/login"
