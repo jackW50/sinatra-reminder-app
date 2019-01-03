@@ -38,7 +38,7 @@ class RemindersController < ApplicationController
   
   get "/reminders/:id" do
     @reminder = Reminder.find_by(id: params[:id])
-    if logged_in? && !!@reminder
+    if logged_in? 
       if reminder_permission?(@reminder)
         erb :"/reminders/show"
       else 
@@ -53,7 +53,7 @@ class RemindersController < ApplicationController
   
   get "/reminders/:id/edit" do
     @reminder = Reminder.find_by(id: params[:id])
-    if logged_in? && !!@reminder 
+    if logged_in?
       if reminder_permission?(@reminder)
         @frequencies = ["daily", "weekly", "monthly"]
         erb :"/reminders/edit"
@@ -69,12 +69,12 @@ class RemindersController < ApplicationController
   
   patch "/reminders/:id" do
     reminder = Reminder.find_by(id: params[:id])
-    if logged_in? && !!reminder 
+    if logged_in?
       if reminder_permission?(reminder)
         if reminder.update(note: params[:note], frequency: params[:frequency])
           redirect "/reminders/#{reminder.id}"
         else 
-          flash[:message] = "You must have text and a field selected to edit."
+          flash[:message] = "You must have text and a field selected to update."
           redirect "/reminders/#{reminder.id}/edit"
         end 
       else 
@@ -89,7 +89,7 @@ class RemindersController < ApplicationController
   
   delete "/reminders/:id/delete" do
     reminder = Reminder.find_by(id: params[:id])
-    if logged_in? && !!reminder 
+    if logged_in? 
       if reminder_permission?(reminder)
         reminder.destroy
         redirect "/users/#{current_user.id}"

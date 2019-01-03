@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   get "/users/:id" do
     user = User.find_by(id: params[:id])
     if logged_in?
-      if user_permission?(user)
+      if user_permission?(user) 
         @user = current_user
         erb :"/users/show"
       else 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   get "/users/:id/edit" do
     user = User.find_by(id: params[:id])
     if logged_in?
-      if user_permission?(user)
+      if user_permission?(user) 
         @user = current_user
         erb :"/users/edit"
       else 
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         if user.update(username: params[:username], email:   params[:email], password: params[:password])
           redirect "/users/#{user.id}"
         else 
-          flash[:message] = "You must all fields filled in and username and email have to be unique."
+          flash[:message] = "You must have all fields filled in and username and email have to be unique."
           redirect "/users/#{current_user.id}/edit"
         end 
       else 
