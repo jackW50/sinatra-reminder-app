@@ -22,8 +22,6 @@ You can make a request or report a bug by creating an issue, or submitting a pul
 
 ## License 
 
-Sinatra-Reminder-App is available as open source under the terms of the [MIT License](https://github.com/schanrai/startup-cms/blob/master/LICENSE).
-
-<a href="https://github.com/jackW50/sinatra-reminder-app/blob/master/LICENSE">MIT License.</a>
+Sinatra-Reminder-App is available as open source under the terms of the <a href="https://github.com/jackW50/sinatra-reminder-app/blob/master/LICENSE">MIT License.</a>
 
 
