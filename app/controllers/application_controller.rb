@@ -30,11 +30,11 @@ class ApplicationController < Sinatra::Base
     end 
     
     def user_permission?(user)
-      if !!user ? user.id == current_user.id : nil 
+      !!user ? user.id == current_user.id : nil 
     end 
     
     def reminder_permission?(reminder)
-      if !!reminder ? reminder.user_id == current_user.id : nil
+      !!reminder ? reminder.user_id == current_user.id : nil
     end 
   end 
 
