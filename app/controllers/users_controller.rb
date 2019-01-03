@@ -36,8 +36,12 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     if logged_in? 
       if user_permission?(user)
-        user.update(username: params[:username], email: params[:email], password: params[:password])
-        redirect "/users/#{user.id}"
+        if user.update(username: params[:username], email:   params[:email], password: params[:password])
+          redirect "/users/#{user.id}"
+        else 
+          flash[:message] = "You must all fields filled in and username and email have to be unique."
+          redirect "/users/#{current_user.id}/edit"
+        end 
       else 
         flash[:message] = "You don't have permission to do that."
         redirect "/users/#{current_user.id}"

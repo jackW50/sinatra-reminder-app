@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id 
       redirect "/users/#{user.id}"
     else
-      flash[:message] = "Make sure all fields are filled in and valid."
+      flash[:message] = "Make sure all fields are filled in with valid information."
       redirect "/login"
     end 
   end 
@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id 
       redirect "/users/#{user.id}"
     else 
-      flash[:message] = "All fields must be filled in with valid information."
+      flash[:message] = "All fields must be filled in and username and email have to be unique values."
       redirect "/signup"
     end 
   end 

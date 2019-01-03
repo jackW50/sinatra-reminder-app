@@ -71,8 +71,12 @@ class RemindersController < ApplicationController
     reminder = Reminder.find_by(id: params[:id])
     if logged_in? && !!reminder 
       if reminder_permission?(reminder)
-        reminder.update(note: params[:note], frequency: params[:frequency])
-        redirect "/reminders/#{reminder.id}"
+        if reminder.update(note: params[:note], frequency: params[:frequency])
+          redirect "/reminders/#{reminder.id}"
+        else 
+          flash[:message] = "You must have text and a field selected to edit."
+          redirect "/reminders/#{reminder.id}/edit"
+        end 
       else 
         flash[:message] = "You don't have permission to do that."
         redirect "/users/#{current_user.id}"

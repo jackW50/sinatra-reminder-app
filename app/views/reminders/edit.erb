@@ -1,5 +1,9 @@
 <h1>Edit Reminder</h1>
 
+<%if !!flash[:message]%>
+  <%=flash[:message]%>
+<%end%>
+
 <form action="/reminders/<%=@reminder.id%>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
   <textarea name="note" rows="15" cols="40"><%=@reminder.note%></textarea>
