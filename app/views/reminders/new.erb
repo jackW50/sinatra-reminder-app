@@ -1,5 +1,9 @@
 <h1>Create Reminder</h1>
 
+<%if !!flash[:message]%>
+  <%=flash[:message]%>
+<%end%>
+
 <form action="/reminders" method="POST">
   <textarea name="note" rows="15" cols="40" placeholder="enter text here"></textarea>
   <input type="radio" name="frequency" value="daily">Daily

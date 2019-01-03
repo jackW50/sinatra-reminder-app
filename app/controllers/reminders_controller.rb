@@ -27,7 +27,7 @@ class RemindersController < ApplicationController
       if reminder.save
         redirect "/reminders/#{reminder.id}"
       else 
-        flash[:message] = "In order to create a reminder you must have text and a reminder frequency needs to be checked."
+        flash[:message] = "In order to create a reminder you must have text and select whether it's daily, weekly, or monthly."
         redirect "/reminders/new"
       end 
     else
@@ -88,7 +88,7 @@ class RemindersController < ApplicationController
     if logged_in? && !!reminder 
       if reminder_permission?(reminder)
         reminder.destroy
-        redirect "/users/#{user.id}"
+        redirect "/users/#{current_user.id}"
       else 
         flash[:message] = "You don't have permission to do that."
         redirect "/users/#{current_user.id}"
