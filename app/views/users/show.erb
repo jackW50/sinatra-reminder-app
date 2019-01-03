@@ -5,7 +5,7 @@
 
 <h3>Hello, <%=@user.username%></h3>
 <h3><%=Date.today.strftime('%a, %b %e %Y')%></h4>
-<a href="/reminders/new">Create a Reminder</a>
+
    
     <%if !@user.reminders.empty?%>
       <h4>Daily Reminders:</h4>
@@ -21,23 +21,17 @@
       <%end%>
     <%end%>
     
+  <form action="/reminders/new" method="GET">
+    <input type="submit" value="Create a Reminder">
+  </form>
+    
 <h3>See your weekly reminders <a href="/reminders/<%=@user.id%>/weekly">HERE</a></h3>
 
 <h3>See your monthly reminders <a href="/reminders/<%=@user.id%>/monthly">HERE</a></h3>
-
+  
+  
 <footer>
-  <ul>
-    <li>
-      <form action="/users/<%=@user.id%>/delete" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete Profile">
-      </form>
-    </li>
-    <li>
-      <a href="/users/<%=@user.id%>/edit">Edit Profile</a>
-    </li>
-    <li>
-  </ul>
+  <a href="/users/<%=@user.id%>/edit">Edit Profile</a>
 </footer>
 
 
