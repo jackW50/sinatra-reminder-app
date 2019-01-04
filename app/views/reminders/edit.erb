@@ -6,7 +6,7 @@
 
 <form action="/reminders/<%=@reminder.id%>" method="POST">
   <input type="hidden" name="_method" value="PATCH">
-  <textarea name="note" rows="15" cols="40"><%=@reminder.note%></textarea>
+  <textarea name="note" rows="5" cols="40"><%=@reminder.note%></textarea>
   <%@frequencies.each do |f|%>
     <input type="radio" name="frequency" value="<%=f%>" <%= 'checked' if @reminder.frequency == f %>><%=f.capitalize%>
   <%end%>
